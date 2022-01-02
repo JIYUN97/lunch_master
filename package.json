@@ -1,0 +1,36 @@
+{
+  "name": "lunch_master",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --exec ts-node ./src/server.ts --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JIYUN97/lunch_master.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JIYUN97/lunch_master/issues"
+  },
+  "homepage": "https://github.com/JIYUN97/lunch_master#readme",
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "@types/jsonwebtoken": "^8.5.6",
+    "@types/mongoose": "^5.11.97",
+    "@types/node": "^17.0.6",
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "eslint": "^8.6.0",
+    "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.1.4"
+  }
+}
