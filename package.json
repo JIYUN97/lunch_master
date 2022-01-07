@@ -60,6 +60,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb-memory-server": "^8.1.0",
     "mongoose": "^6.1.4",
-    "pino": "^7.6.2"
+    "pino": "^7.6.2",
+    "ts-node": "^10.4.0"
   }
 }
