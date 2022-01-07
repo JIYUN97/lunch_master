@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import 'dotenv/config';
+import path from 'path';
 
 class App {
   app: express.Application;
@@ -26,15 +27,14 @@ class App {
   private setMiddleWare(): void {
     this.app.use(express.urlencoded({ extended: false }));
     this.app.use(express.json());
+    // this.app.use(express.static(path.resolve(__dirname, '/public')));
   }
 
   private setRouter(): void {
     this.app.get('/', (req, res) => {
-      res.send('hello');
+      // vue로 build된 파일을 전송합니다.
+      res.sendFile(path.join(__dirname, './public/index.html'));
     });
-    // controllers.forEach((controller) => {
-    //   this.app.use("/", controller.router);
-    // });
   }
 
   private set404Error(): void {
