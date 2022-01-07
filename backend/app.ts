@@ -2,6 +2,8 @@ import express, { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import 'dotenv/config';
 import path from 'path';
+import config from 'config';
+import logger from './util/logger';
 
 class App {
   app: express.Application;
@@ -16,12 +18,13 @@ class App {
   }
 
   private setDB(): void {
-    const databaseName =
-      process.env.NODE_ENV === 'production' ? 'admin' : 'test';
+    const dbName = config.get<string>('dbName');
     mongoose
-      .connect(`mongodb://localhost:27017/${databaseName}`)
-      .then(() => console.log('db connected'))
-      .catch((err) => console.log(err));
+      .connect(
+        `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.w19ct.mongodb.net/${dbName}?retryWrites=true&w=majority`,
+      )
+      .then(() => logger.info('db connected'))
+      .catch((err) => logger.error(err));
   }
 
   private setMiddleWare(): void {

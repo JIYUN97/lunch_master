@@ -1,4 +1,3 @@
-'use strict';
 // Template version: 1.3.1
 // see http://vuejs-templates.github.io/webpack for documentation.
 
@@ -44,10 +43,10 @@ module.exports = {
 
   build: {
     // Template for index.html
-    index: path.resolve(__dirname, '../../src/public/index.html'),
+    index: path.resolve(__dirname, '../../backend/public/index.html'),
 
     // Paths
-    assetsRoot: path.resolve(__dirname, '../../src/public'),
+    assetsRoot: path.resolve(__dirname, '../../backend/public'),
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
 
