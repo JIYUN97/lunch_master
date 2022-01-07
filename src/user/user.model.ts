@@ -7,6 +7,7 @@ import {
 import { logger } from '@typegoose/typegoose/lib/logSettings';
 
 import bcrypt from 'bcrypt';
+import { BaseModel } from '../util/types/BaseModel';
 
 @pre<User>('save', async function () {
   if (!this.isModified('password')) {
@@ -22,7 +23,7 @@ import bcrypt from 'bcrypt';
     timestamps: true,
   },
 })
-export class User {
+export class User extends BaseModel {
   @prop({ required: true, unique: true })
   email!: string;
 

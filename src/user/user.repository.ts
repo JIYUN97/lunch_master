@@ -1,3 +1,4 @@
+import { mongoose } from '@typegoose/typegoose';
 import { UserDto } from './user.dto';
 import UserModel, { User } from './user.model';
 
@@ -11,7 +12,9 @@ export class UserRepository {
     return this.repository.create(input);
   }
 
-  async findById(id: number): Promise<User | undefined> {
+  async findById(
+    id: number | mongoose.Types.ObjectId,
+  ): Promise<User | undefined> {
     const user = await this.repository.findById(id);
     return user ?? undefined;
   }
