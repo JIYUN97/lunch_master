@@ -35,7 +35,7 @@ export class User extends BaseModel {
 
   async validatePassword(cadidatePassword: string): Promise<boolean> {
     try {
-      return bcrypt.compare(this.password, cadidatePassword);
+      return bcrypt.compare(cadidatePassword, this.password);
     } catch (e) {
       logger.error(e, 'Could not vaildate password');
       return false;
