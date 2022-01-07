@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec ts-node ./src/server.ts --watch",
-    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "lint": "eslint src/**/*.ts",
-    "lint:fix": "eslint --fix src/**/*.ts",
+    "start": "nodemon --exec ts-node ./backend/server.ts --watch",
+    "dev": "ts-node-dev --respawn --transpile-only backend/server.ts",
+    "lint": "eslint backend/**/*.ts",
+    "lint:fix": "eslint --fix backend/**/*.ts",
     "test": "jest --detectOpenHandles"
   },
   "repository": {
