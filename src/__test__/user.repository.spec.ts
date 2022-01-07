@@ -1,20 +1,27 @@
+import { MongoMemoryServer } from 'mongodb-memory-server';
 import UserModel, { User } from '../user/user.model';
 import { UserRepository } from '../user/user.repository';
-import { TestDatabase } from './util/TestDatabase';
+import { TestDatabaseClient } from './util/TestDatabaseClient';
 
 describe('User Repostiory Test', () => {
-  let db: TestDatabase;
+  let db: MongoMemoryServer;
+  let connection: TestDatabaseClient;
   let repositoy: UserRepository;
   beforeAll(async () => {
-    db = TestDatabase.getInstance();
-    await db.connect();
+    db = new MongoMemoryServer();
+    await db.start();
+
+    connection = new TestDatabaseClient(db.getUri());
+    await connection.connect();
+
     repositoy = new UserRepository();
   });
   afterEach(async () => {
-    await db.clear();
+    await connection.clear();
   });
   afterAll(async () => {
-    await db.close();
+    await connection.close();
+    await db.stop();
   });
 
   describe('create', () => {

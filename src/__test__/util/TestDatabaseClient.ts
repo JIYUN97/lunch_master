@@ -1,25 +1,12 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import mongoose from 'mongoose';
-import { MongoMemoryServer } from 'mongodb-memory-server';
 
 //SingleTon Pattern으로 만듬
-export class TestDatabase {
-  private static instance: TestDatabase;
-  private mongod = new MongoMemoryServer();
-
-  private constructor() {}
-
-  public static getInstance(): TestDatabase {
-    if (!TestDatabase.instance) {
-      return new TestDatabase();
-    }
-    return TestDatabase.instance;
-  }
+export class TestDatabaseClient {
+  public constructor(private dbUri: string) {}
 
   public async connect(): Promise<void> {
-    await this.mongod.start();
-    const uri = this.mongod.getUri();
-    await mongoose.connect(uri, {
+    await mongoose.connect(this.dbUri, {
       maxPoolSize: 10,
     });
   }
