@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import 'dotenv/config';
+import path from 'path';
 
 class App {
   app: express.Application;
@@ -26,6 +27,7 @@ class App {
   private setMiddleWare(): void {
     this.app.use(express.urlencoded({ extended: false }));
     this.app.use(express.json());
+    this.app.use(express.static(path.join(__dirname, 'public')));
   }
 
   private setRouter(): void {
