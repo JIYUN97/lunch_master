@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Router, Request, Response } from 'express';
 import { validationMiddleware } from '../middleware/vaildation.middleware';
+import { Controller } from '../util/types/Controller';
 import { UserDto } from './user.dto';
 import { UserService } from './user.service';
 
-export class UserController {
+export class UserController implements Controller {
   public router: Router;
-  private path = '/user';
+  public path = '/user';
+
   constructor(private readonly userService: UserService) {
     this.router = Router();
     this.initRouter();
