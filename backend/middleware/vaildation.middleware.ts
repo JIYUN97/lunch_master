@@ -3,7 +3,7 @@
 import { ClassConstructor, plainToInstance } from 'class-transformer';
 import { validate, ValidationError } from 'class-validator';
 import { RequestHandler, Request, Response, NextFunction } from 'express';
-import { HttpException } from '../error/HttpException';
+import { HttpException } from '../util/error/HttpException';
 
 export function validationMiddleware<T>(
   type: ClassConstructor<T>,

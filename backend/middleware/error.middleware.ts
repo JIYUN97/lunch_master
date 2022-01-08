@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextFunction, Request, Response } from 'express';
-import { HttpException } from '../error/HttpException';
+import { HttpException } from '../util/error/HttpException';
 
 export function errorMiddleWare(
   error: HttpException,
