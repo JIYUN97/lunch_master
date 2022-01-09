@@ -1,18 +1,20 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import mongoose from 'mongoose';
 import 'dotenv/config';
 import path from 'path';
 import config from 'config';
 import logger from './util/logger';
+import { errorMiddleWare } from './middleware';
+import { Controller } from './util/types/Controller';
 
 class App {
   app: express.Application;
 
-  constructor() {
+  constructor(controllers: Controller[]) {
     this.app = express();
     this.setDB();
     this.setMiddleWare();
-    this.setRouter();
+    this.setRouter(controllers);
     this.set404Error();
     this.setError();
   }
@@ -33,10 +35,14 @@ class App {
     this.app.use(express.static(path.join(__dirname, 'public')));
   }
 
-  private setRouter(): void {
+  private setRouter(controllers: Controller[]): void {
     this.app.get('/', (req, res) => {
       // vue로 build된 파일을 전송합니다.
       res.sendFile(path.join(__dirname, './public/index.html'));
+    });
+
+    controllers.forEach((controller) => {
+      this.app.use('/', controller.router);
     });
   }
 
@@ -47,10 +53,7 @@ class App {
   }
 
   private setError(): void {
-    this.app.use((err: Error, req: Request, res: Response) => {
-      console.log(err);
-      res.status(500).send({ err: err.message });
-    });
+    this.app.use(errorMiddleWare);
   }
 }
 
