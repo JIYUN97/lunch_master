@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Router, Request, Response } from 'express';
-import { validationMiddleware } from '../middleware/vaildation.middleware';
+import { validationMiddleware } from '../middleware/validation.middleware';
 import { Controller } from '../util/types/Controller';
 import { UserDto } from './user.dto';
 import { UserService } from './user.service';

@@ -23,6 +23,7 @@ export function validationMiddleware<T>(
           return Object.values(error.constraints || 'error');
         })
         .join(',');
+
       next(new HttpException(400, errorMessage));
     } else {
       next();
