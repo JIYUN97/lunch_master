@@ -7,13 +7,17 @@ export function deserializeMiddleWare(
   next: NextFunction,
 ): void {
   if (!req.headers.authorization) {
-    return;
+    return next();
   }
   const accessToken = req.headers.authorization.split('Bearer ')[1];
-  if (!accessToken) return next();
+  if (!accessToken) {
+    return next();
+  }
 
   const decoded = verifyJwt<string>(accessToken, 'accessTokenPublicKey');
-  if (decoded) res.locals.user = decoded;
+  if (decoded) {
+    res.locals.user = decoded;
+  }
 
   return next();
 }

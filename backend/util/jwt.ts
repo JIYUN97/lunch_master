@@ -14,7 +14,11 @@ export async function signJwt(
   keyName: 'accessTokenPrivateKey' | 'refreshTokenPrivateKey',
   options?: jwt.SignOptions,
 ): Promise<string> {
-  const privateKey = config.get<string>(keyName);
+  const privateKey = Buffer.from(
+    config.get<string>(keyName),
+    'base64',
+  ).toString('ascii');
+
   return jwt.sign(object, privateKey, {
     ...(options && options),
     algorithm: 'RS256', // public key private key를 사용하기 위해서
@@ -25,7 +29,10 @@ export function verifyJwt<T>(
   token: string,
   keyName: 'accessTokenPublicKey' | 'refreshTokenPublicKey',
 ): T | null {
-  const publicKey = config.get<string>(keyName);
+  const publicKey = Buffer.from(config.get<string>(keyName), 'base64').toString(
+    'ascii',
+  );
+
   try {
     return jwt.verify(token, publicKey) as T;
   } catch (e) {
