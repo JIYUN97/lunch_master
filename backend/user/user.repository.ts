@@ -21,11 +21,8 @@ export class UserRepository {
     return user ?? undefined;
   }
 
-  // 질문 : FilterQuery타입은 왜 적용이 안될까요..?왤까..
-  async findOne(
-    email: FilterQuery<UserDto['email']>,
-  ): Promise<{ user: UserDto }> {
-    const user = await this.repository.findOne(email);
-    return user;
+  async findOne(email: string): Promise<User | undefined> {
+    const user = await this.repository.findOne({ email });
+    return user ?? undefined;
   }
 }

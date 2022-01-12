@@ -24,7 +24,7 @@ export class UserController implements Controller {
     this.router.post(
       `${this.path}/login`,
       validationMiddleware(UserDto),
-      this.loginUser.bind(this),
+      this.login.bind(this),
     );
   }
 
@@ -36,7 +36,8 @@ export class UserController implements Controller {
     return res.send({ success: 'ok', data: user });
   }
 
-  async login(req: Request, res: Response) {
+  async login(req: Request, res: Response): Promise<Response> {
+    const user = await this.userService.login(req.body);
     return res.json({ success: 'ok', data: user });
   }
 }

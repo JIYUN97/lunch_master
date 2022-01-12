@@ -12,10 +12,10 @@ export class UserService {
   }
 
   // FilterQuery 이게 되는건가여...ㅠ 진짜 필터쿼리...
-  login(
+  async login(
     email: FilterQuery<UserDto['email']>,
   ): Promise<{ token: string; user: UserDto }> {
-    const user = this.userRepository.findOne(email);
+    const user = await this.userRepository.findOne(email);
     if (!user) throw logger.warn(user, '존재하지 않는 유저입니다.');
     //TODO : jwt로 바꾸기
     const token = jwt.sign(
