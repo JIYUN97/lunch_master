@@ -36,6 +36,12 @@ export class UserController implements Controller {
       validationMiddleware(UserDto),
       this.createUesr.bind(this),
     );
+
+    this.router.post(
+      `${this.path}/login`,
+      validationMiddleware(UserDto),
+      this.login.bind(this),
+    );
   }
 
   async createUesr(
@@ -67,5 +73,10 @@ export class UserController implements Controller {
   ): Response<any, Record<string, any>> {
     console.log(res.locals.user);
     return res.send({ success: 'ok', data: res.locals.user });
+  }
+
+  async login(req: Request, res: Response): Promise<Response> {
+    const user = await this.userService.login(req.body);
+    return res.json({ success: 'ok', data: user });
   }
 }
