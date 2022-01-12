@@ -1,4 +1,6 @@
 import { mongoose } from '@typegoose/typegoose';
+import { logger } from '@typegoose/typegoose/lib/logSettings';
+import { FilterQuery } from 'mongoose';
 import { UserDto } from './user.dto';
 import UserModel, { User } from './user.model';
 
@@ -16,6 +18,11 @@ export class UserRepository {
     id: number | mongoose.Types.ObjectId,
   ): Promise<User | undefined> {
     const user = await this.repository.findById(id);
+    return user ?? undefined;
+  }
+
+  async findOne(email: string): Promise<User | undefined> {
+    const user = await this.repository.findOne({ email });
     return user ?? undefined;
   }
 }
